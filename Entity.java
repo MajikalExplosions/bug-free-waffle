@@ -1,9 +1,9 @@
 public class Entity {
-    public final PlayerId owner;
-    public final EntityId id;
-    public final Position position;
+    public int owner;
+    public int id;
+    public Position position;
 
-    public Entity(final PlayerId owner, final EntityId id, final Position position) {
+    public Entity(int ownerid, int entityid, Position position) {
         this.owner = owner;
         this.id = id;
         this.position = position;
@@ -16,15 +16,15 @@ public class Entity {
 
         Entity entity = (Entity) o;
 
-        if (!owner.equals(entity.owner)) return false;
-        if (!id.equals(entity.id)) return false;
+        if (owner != entity.owner) return false;
+        if (id != entity.id) return false;
         return position.equals(entity.position);
     }
 
     @Override
     public int hashCode() {
-        int result = owner.hashCode();
-        result = 31 * result + id.hashCode();
+        int result = owner;
+        result = 31 * result + id;
         result = 31 * result + position.hashCode();
         return result;
     }

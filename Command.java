@@ -1,20 +1,20 @@
 public class Command {
-    public final String command;
+    private String command;
+
+    public Command(String c) {
+        command = c;
+    }
 
     public static Command spawnShip() {
         return new Command("g");
     }
 
-    public static Command transformShipIntoDropoffSite(final EntityId id) {
-        return new Command("c " + id);
+    public static Command transformShipIntoDropoffSite(int shipid) {
+        return new Command("c " + shipid);
     }
 
-    public static Command move(final EntityId id, final Direction direction) {
-        return new Command("m " + id + ' ' + direction.charValue);
-    }
-
-    private Command(final String command) {
-        this.command = command;
+    public static Command move(int shipid, Direction direction) {
+        return new Command("m " + shipid + ' ' + direction.charValue);
     }
 
     @Override
