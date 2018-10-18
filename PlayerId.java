@@ -1,11 +1,7 @@
-package hlt;
-
-public class EntityId {
-    public static final EntityId NONE = new EntityId(-1);
-
+public class PlayerId {
     public final int id;
 
-    public EntityId(int id) {
+    public PlayerId(int id) {
         this.id = id;
     }
 
@@ -19,9 +15,9 @@ public class EntityId {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EntityId entityId = (EntityId) o;
+        PlayerId playerId = (PlayerId) o;
 
-        return id == entityId.id;
+        return id == playerId.id;
     }
 
     @Override

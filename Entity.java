@@ -1,5 +1,3 @@
-package hlt;
-
 public class Entity {
     public final PlayerId owner;
     public final EntityId id;

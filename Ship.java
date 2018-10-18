@@ -1,5 +1,3 @@
-package hlt;
-
 public class Ship extends Entity {
     public final int halite;
 

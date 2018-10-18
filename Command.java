@@ -1,5 +1,3 @@
-package hlt;
-
 public class Command {
     public final String command;
 
