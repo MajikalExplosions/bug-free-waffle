@@ -30,18 +30,21 @@ public class Plantain {
 	}
 
 	private void templateTurn(Player p, GameMap m) {
+		Log.log("Running turn.");
 		for (Ship ship : p.ships.values()) {
             if (m.at(ship).halite < Constants.MAX_HALITE / 10 || ship.isFull()) {
                 Direction randomDirection = Direction.ALL_CARDINALS.get(random.nextInt(4));
                 commands.add(ship.move(randomDirection));
+                Log.log("Moved a ship.");
             } else {
                 commands.add(ship.stayStill());
+                Log.log("Ship staying still.");
             }
         }
 
-        if (
-            game.turnNumber <= 200 && p.halite >= Constants.SHIP_COST && !m.at(p.shipyard).isOccupied())
+        if (game.turnNumber <= 200 && p.halite >= Constants.SHIP_COST && !m.at(p.shipyard).isOccupied())
         {
+        	Log.log("Producing new ship.");
             commands.add(p.shipyard.spawn());
         }
 	}
