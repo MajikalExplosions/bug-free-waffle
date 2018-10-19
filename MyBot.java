@@ -6,28 +6,22 @@ import java.util.Random;
 
 public class MyBot {
     public static void main(String[] args) {
-        long rngSeed;
-        if (args.length > 1) {
-            rngSeed = Integer.parseInt(args[1]);
-        } else {
-            rngSeed = System.nanoTime();
-        }
-        Random rng = new Random(rngSeed);
-
+        Random rng = getRNG();
         Game game = new Game();
+        Plantain bot = new Plantain(rng, game);
         // At this point "game" variable is populated with initial map data.
         // This is a good place to do computationally expensive start-up pre-processing.
         // As soon as you call "ready" function below, the 2 second per turn timer will start.
-        game.ready("MyJavaBot");
+        game.ready("Gros Michel");
 
-        Log.log("Successfully created bot! My Player ID is " + game.myId + ". Bot rng seed is " + rngSeed + ".");
+        Log.log("Bot created.\nID: " + game.myId + "\nRNG Seed: " + rngSeed + "\n");
 
-        for (;;) {
+        while(true) {
             game.updateFrame();
-            Player me = game.me;
-            GameMap gameMap = game.gameMap;
-
-            ArrayList<Command> commandQueue = new ArrayList<>();
+            plantain.runTurn(game.me, game.gameMap);
+        }
+        /*
+        for (;;) {
 
             for (Ship ship : me.ships.values()) {
                 if (gameMap.at(ship).halite < Constants.MAX_HALITE / 10 || ship.isFull()) {
@@ -45,8 +39,17 @@ public class MyBot {
             {
                 commandQueue.add(me.shipyard.spawn());
             }
-
-            game.endTurn(commandQueue);
         }
+        */
+    }
+
+    private static Random getRNG() {
+        long rngSeed;
+        if (args.length > 1) {
+            rngSeed = Integer.parseInt(args[1]);
+        } else {
+            rngSeed = System.nanoTime();
+        }
+        return new Random(rngSeed);
     }
 }
