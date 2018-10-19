@@ -2,6 +2,7 @@
 //     Otherwise the names of methods are consistent.
 
 import hlt.*;
+import NeuralNet*;
 
 import java.util.ArrayList;
 import java.util.Random;
