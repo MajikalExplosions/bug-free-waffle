@@ -3,6 +3,8 @@ import java.util.Random;
 
 public class Plantain {
 
+	private final String BOT_VERSION = "0.1.0 Eureka";
+
 	ArrayList<Command> commands;
 	Random random;
 	Game game;
@@ -10,12 +12,38 @@ public class Plantain {
 	public Plantain(Random rng, Game g) {
 		random = rng;
 		game = g;
+		Log.log("Starting Plantain...\nBot Version: " + BOT_VERSION + "\n");
+	}
+
+	public void initialize() {
+		//Do nothing for now.
+		Log.log("Nothing to do in initialize() :)");
+
+		Log.log("Plantain successfully started.");
 	}
 
 	public void runTurn(Player me, GameMap map) {
 		commands = new ArrayList<>();
 		//Run turn logic
+		templateTurn(me, map);
 		game.endTurn(commands);
+	}
+
+	private void templateTurn(Player p, GameMap m) {
+		for (Ship ship : p.ships.values()) {
+            if (m.at(ship).halite < Constants.MAX_HALITE / 10 || ship.isFull()) {
+                Direction randomDirection = Direction.ALL_CARDINALS.get(random.nextInt(4));
+                commands.add(ship.move(randomDirection));
+            } else {
+                commands.add(ship.stayStill());
+            }
+        }
+
+        if (
+            game.turnNumber <= 200 && p.halite >= Constants.SHIP_COST && !m.at(p.shipyard).isOccupied())
+        {
+            commands.add(p.shipyard.spawn());
+        }
 	}
 
 	/*
