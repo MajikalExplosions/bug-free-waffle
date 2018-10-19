@@ -17,6 +17,10 @@ public class MyBot {
 
         while(true) {
             game.updateFrame();
+            Log.log("This player's ships: ");
+            for (Ship s : game.me.ships.values()) {
+                Log.log("S:" + s.id);
+            }
             bot.runTurn(game.me, game.gameMap);
         }
     }

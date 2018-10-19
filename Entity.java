@@ -4,8 +4,8 @@ public class Entity {
     public Position position;
 
     public Entity(int ownerid, int entityid, Position position) {
-        this.owner = owner;
-        this.id = id;
+        this.owner = ownerid;
+        this.id = entityid;
         this.position = position;
     }
 

@@ -42,7 +42,7 @@ public class Game {
 
             players.get(currentPlayerId)._update(numShips, numDropoffs, halite);
         }
-
+        
         gameMap._update();
 
         for (Player player : players) {

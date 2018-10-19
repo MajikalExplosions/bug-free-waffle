@@ -25,13 +25,16 @@ public class Plantain {
 	public void runTurn(Player me, GameMap map) {
 		commands = new ArrayList<>();
 		//Run turn logic
+		Log.log("This player's ships: " + me.ships.values());
 		templateTurn(me, map);
 		game.endTurn(commands);
 	}
 
 	private void templateTurn(Player p, GameMap m) {
-		Log.log("Running turn.");
-		for (Ship ship : p.ships.values()) {
+		Log.log("Running turn for player " + p.id);
+		Log.log("This player's ships3: " + p.ships.values());
+		for (Ship ship : p.ships.values()) {//Ship values are wrong...?
+			Log.log("CalcShip: " + ship);
             if (m.at(ship).halite < Constants.MAX_HALITE / 10 || ship.isFull()) {
                 Direction randomDirection = Direction.ALL_CARDINALS.get(random.nextInt(4));
                 commands.add(ship.move(randomDirection));
