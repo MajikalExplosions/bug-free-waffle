@@ -6,9 +6,10 @@ import java.util.Random;
 
 public class MyBot {
     public static void main(String[] args) {
+        Config config = new Config(/*16, */100, 250, 750, 300);
         Game game = new Game();
         Random rng = getRNG(args);
-        Plantain bot = new Plantain(rng, game);
+        Plantain bot = new Plantain(rng, game, config);
         bot.initialize();
         
         game.ready("Gros Michel");

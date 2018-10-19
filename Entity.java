@@ -2,6 +2,11 @@ public class Entity {
     public int owner;
     public int id;
     public Position position;
+    public ControlQueue queue;
+
+    public Command doNextAction() {
+        return queue.pop();
+    }
 
     public Entity(int ownerid, int entityid, Position position) {
         this.owner = ownerid;

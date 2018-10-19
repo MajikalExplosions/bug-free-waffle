@@ -4,14 +4,16 @@ import java.util.Random;
 public class Plantain {
 
 	private final String BOT_VERSION = "0.1.0 Eureka";
+	public final Config CONFIG;
 
 	ArrayList<Command> commands;
 	Random random;
 	Game game;
 
-	public Plantain(Random rng, Game g) {
+	public Plantain(Random rng, Game g, Config c) {
 		random = rng;
 		game = g;
+		CONFIF = c;
 		Log.log("Starting Plantain...\nBot Version: " + BOT_VERSION + "\n");
 	}
 
@@ -25,29 +27,28 @@ public class Plantain {
 	public void runTurn(Player me, GameMap map) {
 		commands = new ArrayList<>();
 		//Run turn logic
-		Log.log("This player's ships: " + me.ships.values());
 		templateTurn(me, map);
 		game.endTurn(commands);
 	}
 
+	public void eurekaTurn() {
+		//Versions 0.1.?
+
+		//Add_code_here
+	}
+
 	private void templateTurn(Player p, GameMap m) {
-		Log.log("Running turn for player " + p.id);
-		Log.log("This player's ships3: " + p.ships.values());
 		for (Ship ship : p.ships.values()) {//Ship values are wrong...?
-			Log.log("CalcShip: " + ship);
             if (m.at(ship).halite < Constants.MAX_HALITE / 10 || ship.isFull()) {
                 Direction randomDirection = Direction.ALL_CARDINALS.get(random.nextInt(4));
                 commands.add(ship.move(randomDirection));
-                Log.log("Moved a ship.");
             } else {
                 commands.add(ship.stayStill());
-                Log.log("Ship staying still.");
             }
         }
 
         if (game.turnNumber <= 200 && p.halite >= Constants.SHIP_COST && !m.at(p.shipyard).isOccupied())
         {
-        	Log.log("Producing new ship.");
             commands.add(p.shipyard.spawn());
         }
 	}
