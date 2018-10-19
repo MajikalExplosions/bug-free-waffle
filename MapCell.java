@@ -1,10 +1,10 @@
 public class MapCell {
-    public final Position position;
+    public Position position;
     public int halite;
     public Ship ship;
     public Entity structure;
 
-    public MapCell(final Position position, final int halite) {
+    public MapCell(Position position, int halite) {
         this.position = position;
         this.halite = halite;
     }
@@ -21,7 +21,7 @@ public class MapCell {
         return structure != null;
     }
 
-    public void markUnsafe(final Ship ship) {
+    public void markUnsafe(Ship ship) {
         this.ship = ship;
     }
 }

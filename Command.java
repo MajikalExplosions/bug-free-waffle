@@ -1,5 +1,5 @@
 public class Command {
-    private String command;
+    public String command;
 
     public Command(String c) {
         command = c;

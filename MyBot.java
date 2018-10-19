@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MyBot {
-    public static void main(final String[] args) {
-        final long rngSeed;
+    public static void main(String[] args) {
+        long rngSeed;
         if (args.length > 1) {
             rngSeed = Integer.parseInt(args[1]);
         } else {
             rngSeed = System.nanoTime();
         }
-        final Random rng = new Random(rngSeed);
+        Random rng = new Random(rngSeed);
 
         Game game = new Game();
         // At this point "game" variable is populated with initial map data.
@@ -24,14 +24,14 @@ public class MyBot {
 
         for (;;) {
             game.updateFrame();
-            final Player me = game.me;
-            final GameMap gameMap = game.gameMap;
+            Player me = game.me;
+            GameMap gameMap = game.gameMap;
 
-            final ArrayList<Command> commandQueue = new ArrayList<>();
+            ArrayList<Command> commandQueue = new ArrayList<>();
 
-            for (final Ship ship : me.ships.values()) {
+            for (Ship ship : me.ships.values()) {
                 if (gameMap.at(ship).halite < Constants.MAX_HALITE / 10 || ship.isFull()) {
-                    final Direction randomDirection = Direction.ALL_CARDINALS.get(rng.nextInt(4));
+                    Direction randomDirection = Direction.ALL_CARDINALS.get(rng.nextInt(4));
                     commandQueue.add(ship.move(randomDirection));
                 } else {
                     commandQueue.add(ship.stayStill());

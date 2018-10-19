@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 public class GameMap {
-    public final int width;
-    public final int height;
-    public final MapCell[][] cells;
+    public int width;
+    public int height;
+    public MapCell[][] cells;
 
-    public GameMap(final int width, final int height) {
+    public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
 
@@ -15,44 +15,44 @@ public class GameMap {
         }
     }
 
-    public MapCell at(final Position position) {
-        final Position normalized = normalize(position);
+    public MapCell at(Position position) {
+        Position normalized = normalize(position);
         return cells[normalized.y][normalized.x];
     }
 
-    public MapCell at(final Entity entity) {
+    public MapCell at(Entity entity) {
         return at(entity.position);
     }
 
-    public int calculateDistance(final Position source, final Position target) {
-        final Position normalizedSource = normalize(source);
-        final Position normalizedTarget = normalize(target);
+    public int calculateDistance(Position source, Position target) {
+        Position normalizedSource = normalize(source);
+        Position normalizedTarget = normalize(target);
 
-        final int dx = Math.abs(normalizedSource.x - normalizedTarget.x);
-        final int dy = Math.abs(normalizedSource.y - normalizedTarget.y);
+        int dx = Math.abs(normalizedSource.x - normalizedTarget.x);
+        int dy = Math.abs(normalizedSource.y - normalizedTarget.y);
 
-        final int toroidal_dx = Math.min(dx, width - dx);
-        final int toroidal_dy = Math.min(dy, height - dy);
+        int toroidal_dx = Math.min(dx, width - dx);
+        int toroidal_dy = Math.min(dy, height - dy);
 
         return toroidal_dx + toroidal_dy;
     }
 
-    public Position normalize(final Position position) {
-        final int x = ((position.x % width) + width) % width;
-        final int y = ((position.y % height) + height) % height;
+    public Position normalize(Position position) {
+        int x = ((position.x % width) + width) % width;
+        int y = ((position.y % height) + height) % height;
         return new Position(x, y);
     }
 
-    public ArrayList<Direction> getUnsafeMoves(final Position source, final Position destination) {
-        final ArrayList<Direction> possibleMoves = new ArrayList<>();
+    public ArrayList<Direction> getUnsafeMoves(Position source, Position destination) {
+        ArrayList<Direction> possibleMoves = new ArrayList<>();
 
-        final Position normalizedSource = normalize(source);
-        final Position normalizedDestination = normalize(destination);
+        Position normalizedSource = normalize(source);
+        Position normalizedDestination = normalize(destination);
 
-        final int dx = Math.abs(normalizedSource.x - normalizedDestination.x);
-        final int dy = Math.abs(normalizedSource.y - normalizedDestination.y);
-        final int wrapped_dx = width - dx;
-        final int wrapped_dy = height - dy;
+        int dx = Math.abs(normalizedSource.x - normalizedDestination.x);
+        int dy = Math.abs(normalizedSource.y - normalizedDestination.y);
+        int wrapped_dx = width - dx;
+        int wrapped_dy = height - dy;
 
         if (normalizedSource.x < normalizedDestination.x) {
             possibleMoves.add(dx > wrapped_dx ? Direction.WEST : Direction.EAST);
@@ -69,10 +69,10 @@ public class GameMap {
         return possibleMoves;
     }
 
-    public Direction naiveNavigate(final Ship ship, final Position destination) {
+    public Direction naiveNavigate(Ship ship, Position destination) {
         // getUnsafeMoves normalizes for us
-        for (final Direction direction : getUnsafeMoves(ship.position, destination)) {
-            final Position targetPos = ship.position.directionalOffset(direction);
+        for (Direction direction : getUnsafeMoves(ship.position, destination)) {
+            Position targetPos = ship.position.directionalOffset(direction);
             if (!at(targetPos).isOccupied()) {
                 at(targetPos).markUnsafe(ship);
                 return direction;
@@ -89,29 +89,29 @@ public class GameMap {
             }
         }
 
-        final int updateCount = Input.readInput().getInt();
+        int updateCount = Input.readInput().getInt();
 
         for (int i = 0; i < updateCount; ++i) {
-            final Input input = Input.readInput();
-            final int x = input.getInt();
-            final int y = input.getInt();
+            Input input = Input.readInput();
+            int x = input.getInt();
+            int y = input.getInt();
 
             cells[y][x].halite = input.getInt();
         }
     }
 
     static GameMap _generate() {
-        final Input mapInput = Input.readInput();
-        final int width = mapInput.getInt();
-        final int height = mapInput.getInt();
+        Input mapInput = Input.readInput();
+        int width = mapInput.getInt();
+        int height = mapInput.getInt();
 
-        final GameMap map = new GameMap(width, height);
+        GameMap map = new GameMap(width, height);
 
         for (int y = 0; y < height; ++y) {
-            final Input rowInput = Input.readInput();
+            Input rowInput = Input.readInput();
 
             for (int x = 0; x < width; ++x) {
-                final int halite = rowInput.getInt();
+                int halite = rowInput.getInt();
                 map.cells[y][x] = new MapCell(new Position(x, y), halite);
             }
         }

@@ -1,15 +1,15 @@
 public class Position {
-    public final int x;
-    public final int y;
+    public int x;
+    public int y;
 
-    public Position(final int x, final int y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    Position directionalOffset(final Direction d) {
-        final int dx;
-        final int dy;
+    Position directionalOffset(Direction d) {
+        int dx;
+        int dy;
 
         switch (d) {
             case NORTH:

@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Log {
-    private final FileWriter file;
+    private FileWriter file;
 
     private static Log INSTANCE;
     private static ArrayList<String> LOG_BUFFER = new ArrayList<>();
@@ -19,48 +19,48 @@ public class Log {
                 return;
             }
 
-            final long now_in_nanos = System.nanoTime();
-            final String filename = "bot-unknown-" + now_in_nanos + ".log";
-            try (final FileWriter writer = new FileWriter(filename)) {
-                for (final String message : LOG_BUFFER) {
+            long now_in_nanos = System.nanoTime();
+            String filename = "bot-unknown-" + now_in_nanos + ".log";
+            try (FileWriter writer = new FileWriter(filename)) {
+                for (String message : LOG_BUFFER) {
                     writer.append(message).append('\n');
                 }
-            } catch (final IOException e) {
+            } catch (IOException e) {
                 // Nothing much we can do here.
             }
         }
     }
 
-    private Log(final FileWriter f) {
+    private Log(FileWriter f) {
         file = f;
     }
 
-    static void open(final int botId) {
+    static void open(int botId) {
         if (INSTANCE != null) {
             Log.log("Error: log: tried to open(" + botId + ") but we have already opened before.");
             throw new IllegalStateException();
         }
 
-        final String filename = "bot-" + botId + ".log";
-        final FileWriter writer;
+        String filename = "bot-" + botId + ".log";
+        FileWriter writer;
         try {
             writer = new FileWriter(filename);
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new IllegalStateException(e);
         }
         INSTANCE = new Log(writer);
 
         try {
-            for (final String message : LOG_BUFFER) {
+            for (String message : LOG_BUFFER) {
                 writer.append(message).append('\n');
             }
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new IllegalStateException(e);
         }
         LOG_BUFFER.clear();
     }
 
-    public static void log(final String message) {
+    public static void log(String message) {
         if (INSTANCE == null) {
             LOG_BUFFER.add(message);
             return;
@@ -68,7 +68,7 @@ public class Log {
 
         try {
             INSTANCE.file.append(message).append('\n').flush();
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

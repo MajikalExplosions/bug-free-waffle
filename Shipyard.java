@@ -1,6 +1,6 @@
 public class Shipyard extends Entity {
-    public Shipyard(final PlayerId owner, final Position position) {
-        super(owner, EntityId.NONE, position);
+    public Shipyard(int ownerid, Position position) {
+        super(ownerid, -1, position);
     }
 
     public Command spawn() {

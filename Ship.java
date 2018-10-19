@@ -1,8 +1,8 @@
 public class Ship extends Entity {
-    public final int halite;
+    public int halite;
 
-    public Ship(final PlayerId owner, final EntityId id, final Position position, final int halite) {
-        super(owner, id, position);
+    public Ship(int ownerid, int entityid, Position position, int halite) {
+        super(ownerid, entityid, position);
         this.halite = halite;
     }
 
@@ -14,7 +14,7 @@ public class Ship extends Entity {
         return Command.transformShipIntoDropoffSite(id);
     }
 
-    public Command move(final Direction direction) {
+    public Command move(Direction direction) {
         return Command.move(id, direction);
     }
 
@@ -22,15 +22,15 @@ public class Ship extends Entity {
         return Command.move(id, Direction.STILL);
     }
 
-    static Ship _generate(final PlayerId playerId) {
-        final Input input = Input.readInput();
+    static Ship _generate(int ownerid) {
+        Input input = Input.readInput();
 
-        final EntityId shipId = new EntityId(input.getInt());
-        final int x = input.getInt();
-        final int y = input.getInt();
-        final int halite = input.getInt();
+        int shipId = input.getInt();
+        int x = input.getInt();
+        int y = input.getInt();
+        int halite = input.getInt();
 
-        return new Ship(playerId, shipId, new Position(x, y), halite);
+        return new Ship(ownerid, shipId, new Position(x, y), halite);
     }
 
     @Override
