@@ -1,3 +1,5 @@
+import java.utils.*;
+
 class Matrix {
 
 //random vars
@@ -12,7 +14,7 @@ class Matrix {
     matrix = new float[rows][cols];
   }
 
-//2D array
+//2D array where we are able to build layers ontop of
   Matrix(float[][] m) {
     matrix = m;
     columns = m.length;
@@ -41,7 +43,7 @@ void stronger(float n) {
 
 Matrix dot(Matrix n) {
     Matrix result = new Matrix(rows, n.cols);
-   
+
     if (cols == n.rows) {
       	//for each spot in the new matrix
       	for (int i =0; i<rows; i++) {

@@ -2,7 +2,7 @@
 //     Otherwise the names of methods are consistent.
 
 import hlt.*;
-import NeuralNet*;
+import neuralnet.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,13 +15,13 @@ public class MyBot {
         } else {
             rngSeed = System.nanoTime();
         }
-        final Random rng = new Random(rngSeed);
+        final Random rng = new Random(rngSeed);//Show me the neuralnet file plz
 
         Game game = new Game();
         // At this point "game" variable is populated with initial map data.
         // This is a good place to do computationally expensive start-up pre-processing.
         // As soon as you call "ready" function below, the 2 second per turn timer will start.
-        game.ready("MyJavaBot");
+        game.ready("BaconD");
 
         Log.log("Successfully created bot! My Player ID is " + game.myId + ". Bot rng seed is " + rngSeed + ".");
 
@@ -29,7 +29,7 @@ public class MyBot {
             game.updateFrame();
             final Player me = game.me;
             final GameMap gameMap = game.gameMap;
-
+//
             final ArrayList<Command> commandQueue = new ArrayList<>();
 
             for (final Ship ship : me.ships.values()) {
