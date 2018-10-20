@@ -3,7 +3,8 @@ import java.util.Random;
 
 public class Plantain {
 
-	private final String BOT_VERSION = "0.2.1 Monterey";
+	private final String BOT_VERSION = "0.2.1";
+	private final String VERSION_NAME = "Monterey";
 	public final Config CONFIG;
 
 	private ArrayList<Command> commands;

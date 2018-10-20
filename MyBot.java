@@ -12,7 +12,7 @@ public class MyBot {
         Plantain bot = new Plantain(rng, game, config);
         bot.initialize();
         
-        game.ready("Gros Michel");
+        game.ready("Gros Michel " + bot.BOT_VERSION);
 
         Log.log("Bot created.\nID: " + game.myId + "\n");
 
