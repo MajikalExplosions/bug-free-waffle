@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class MyBot {
     public static void main(String[] args) {
-        Config config = new Config(/*16, */100, 250, 750, 300);
+        Config config = new Config(/*16, */100, 250, 500, 100);
         Game game = new Game();
         Random rng = getRNG(args);
         Plantain bot = new Plantain(rng, game, config);
@@ -18,10 +18,6 @@ public class MyBot {
 
         while(true) {
             game.updateFrame();
-            Log.log("This player's ships: ");
-            for (Ship s : game.me.ships.values()) {
-                Log.log("S:" + s.id);
-            }
             bot.runTurn(game.me, game.gameMap);
         }
     }
