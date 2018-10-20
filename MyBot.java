@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class MyBot {
     public static void main(String[] args) {
-        Config config = new Config(/*16, */100, 250, 500, 100);
+        Config config = new Config(/*16, */100, 175, 450, 75);
         Game game = new Game();
         Random rng = getRNG(args);
         Plantain bot = new Plantain(rng, game, config);
