@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class Plantain {
 
-	private final String BOT_VERSION = "0.2.1";
-	private final String VERSION_NAME = "Monterey";
+	public final String BOT_VERSION = "0.2.1";
+	public final String VERSION_NAME = "Monterey";
 	public final Config CONFIG;
 
 	private ArrayList<Command> commands;
@@ -16,6 +16,7 @@ public class Plantain {
 		game = g;
 		CONFIG = c;
 		Log.log("Starting Plantain...\nBot Version: " + BOT_VERSION + "\n");
+		Log.log("\n================ Config Vars ================\nMax Ship Count:" + CONFIG.maxShipCount + "\nMax Ship Production Turn:" + CONFIG.maxShipTurn + "\nMax Ship Capacity:" + CONFIG.maxCapacityBeforeDropoff + "\nMinimum Halite Amount:" + CONFIG.minHaliteAmount + "\n=============================================\n\n");
 	}
 
 	public void initialize() {
@@ -54,22 +55,6 @@ public class Plantain {
 		}
 		//Add_code_here
 		if (game.turnNumber <= CONFIG.maxShipTurn && p.halite >= Constants.SHIP_COST && !m.at(p.shipyard).isOccupied() && p.ships.size() < CONFIG.maxShipCount) commands.add(p.shipyard.spawn());
-	}
-
-	private void eureka(Player p, GameMap m) {
-		for (Ship ship : p.ships.values()) {//Ship values are wrong...?
-            if (m.at(ship).halite < Constants.MAX_HALITE / 10 || ship.isFull()) {
-                Direction randomDirection = Direction.ALL_CARDINALS.get(random.nextInt(4));
-                commands.add(ship.move(randomDirection));
-            } else {
-                commands.add(ship.stayStill());
-            }
-        }
-
-        if (game.turnNumber <= 200 && p.halite >= Constants.SHIP_COST && !m.at(p.shipyard).isOccupied())
-        {
-            commands.add(p.shipyard.spawn());
-        }
 	}
 
 	/*

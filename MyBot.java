@@ -6,15 +6,15 @@ import java.util.Random;
 
 public class MyBot {
     public static void main(String[] args) {
-        Config config = new Config(/*16, */100, 175, 450, 75);
-        Game game = new Game();
         Random rng = getRNG(args);
+        Config config = new Config(/*16, */randomInt(rng, 75, 125), randomInt(rng, 100, 250), randomInt(rng, 300, 750), randomInt(rng, 50, 500));
+        Game game = new Game();
         Plantain bot = new Plantain(rng, game, config);
         bot.initialize();
         
         game.ready("Gros Michel " + bot.BOT_VERSION);
 
-        Log.log("Bot created.\nID: " + game.myId + "\n");
+        Log.log("\nID: " + game.myId + "\n");
 
         while(true) {
             game.updateFrame();
@@ -29,6 +29,11 @@ public class MyBot {
         } else {
             rngSeed = System.nanoTime();
         }
+        Log.log("Random Seed: " + rngSeed);
         return new Random(rngSeed);
+    }
+
+    private static int randomInt(Random r, int min, int max) {
+        return r.nextInt(max - min) + min;
     }
 }

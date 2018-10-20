@@ -15,7 +15,6 @@ public class Ship extends Entity {
     }
 
     public Command move(Direction direction) {
-        Log.log("Moving ship " + id);
         return Command.move(id, direction);
     }
 
@@ -29,7 +28,6 @@ public class Ship extends Entity {
         int x = input.getInt();
         int y = input.getInt();
         int halite = input.getInt();
-        Log.log("Generated ship " + shipId + "@" + x + ", " + y + " (Player " + ownerid + ")");
         return new Ship(ownerid, shipId, new Position(x, y), halite);
     }
 
