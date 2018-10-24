@@ -86,7 +86,7 @@ public class NeuralNet {
         return outputs.toArray();
     }
 
-    //sex aka offspring algorithm
+    //offspring algorithm
     NeuralNet crossover(NeuralNet partner) {
 
         //creates a new child with layer matrices from both parents
