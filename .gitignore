@@ -9,3 +9,6 @@ __pycache__/
 *.class
 *.ipr
 *.iws
+*.iml
+*.xml
+*.md
