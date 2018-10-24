@@ -1,5 +1,7 @@
+// This Java API uses camelCase instead of the snake_case as documented in the API docs.
+//     Otherwise the names of methods are consistent.
+
 import hlt.*;
-import NeuralNet.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,14 +14,17 @@ public class MyBot {
         } else {
             rngSeed = System.nanoTime();
         }
-
         final Random rng = new Random(rngSeed);
 
         Game game = new Game();
-        game.ready("BaconD");
+        // At this point "game" variable is populated with initial map data.
+        // This is a good place to do computationally expensive start-up pre-processing.
+        // As soon as you call "ready" function below, the 2 second per turn timer will start.
+        game.ready("MyJavaBot");
+
         Log.log("Successfully created bot! My Player ID is " + game.myId + ". Bot rng seed is " + rngSeed + ".");
 
-        while(true) {
+        for (;;) {
             game.updateFrame();
             final Player me = game.me;
             final GameMap gameMap = game.gameMap;
