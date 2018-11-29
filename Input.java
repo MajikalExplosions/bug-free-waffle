@@ -1,10 +1,8 @@
-package hlt;
-
 public class Input {
-    private final String[] input;
+    private String[] input;
     private int current;
 
-    public Input(final String line) {
+    public Input(String line) {
         input = line.split(" ");
     }
 
@@ -18,7 +16,7 @@ public class Input {
 
     public static String readLine() {
         try {
-            final StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
 
             int buffer;
             for (; (buffer = System.in.read()) >= 0;) {
@@ -33,7 +31,7 @@ public class Input {
             }
 
             return builder.toString();
-        } catch (final Exception e) {
+        } catch (Exception e) {
             Log.log("Input connection from server closed. Exiting...");
             System.exit(0);
             throw new IllegalStateException(e);

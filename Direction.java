@@ -1,5 +1,3 @@
-package hlt;
-
 import java.util.ArrayList;
 
 public enum Direction {
