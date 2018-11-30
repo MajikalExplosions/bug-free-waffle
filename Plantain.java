@@ -4,7 +4,7 @@ import java.util.Random;
 public class Plantain {
 
 	public final String BOT_VERSION = "0.2.1";
-	public final String VERSION_NAME = "Monterey";
+	public final String VERSION_NAME = "Burlingame";
 	public final Config CONFIG;
 
 	private ArrayList<Command> commands;

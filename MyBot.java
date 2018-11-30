@@ -6,13 +6,14 @@ import java.util.Random;
 public class MyBot {
     public static void main(String[] args) {
         Random rng = new Random();
-        Config config = new Config(/*16, */randomInt(rng, 75, 125), randomInt(rng, 100, 250), randomInt(rng, 300, 750), randomInt(rng, 50, 500));
+        Config config = new Config(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+        //Config config = new Config(/*16, */randomInt(rng, 75, 125), randomInt(rng, 100, 250), randomInt(rng, 300, 750), randomInt(rng, 50, 500));
         rng = getRNG(args);
         Game game = new Game();
         Plantain bot = new Plantain(rng, game, config);
         bot.initialize();
 
-        game.ready("Gros Michel " + bot.BOT_VERSION);
+        game.ready("Gros Michel v" + bot.BOT_VERSION + " " + bot.VERSION_NAME);
 
         Log.log("\nID: " + game.myId + "\n");
 
