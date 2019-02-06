@@ -16,11 +16,21 @@ public class MyBot {
         game.ready("Gros Michel v" + bot.BOT_VERSION + " " + bot.VERSION_NAME);
 
         Log.log("\nID: " + game.myId + "\n");
-
-        while(true) {
+        boolean nextTurn = true;
+        while(nextTurn) {
             game.updateFrame();
-            bot.runTurn(game.me, game.gameMap);
+            nextTurn = bot.runTurn(game.me, game.gameMap);
         }
+        for (int i = 0; i < args.length; i++) {
+            System.out.println(args[i]);
+        }
+        if (game.myId == 0) {
+            if (game.players.get(0).halite > game.players.get(1).halite) System.out.println(0);
+        }
+        else if (game.myId == 1) {
+            if (game.players.get(1).halite > game.players.get(0).halite) System.out.println(0);
+        }
+        else System.out.println(1);
     }
 
     private static Random getRNG(String[] args) {

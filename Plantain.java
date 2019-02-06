@@ -26,11 +26,13 @@ public class Plantain {
 		Log.log("Plantain successfully started.");
 	}
 
-	public void runTurn(Player me, GameMap map) {
+	public boolean runTurn(Player me, GameMap map) {
 		commands = new ArrayList<>();
 		//Run turn logic
 		monterey(me, map);
 		game.endTurn(commands);
+		if (game.turnNumber == 400) return false;
+		return true;
 	}
 
 	private void monterey(Player p, GameMap m) {

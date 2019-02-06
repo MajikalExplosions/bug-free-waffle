@@ -10,7 +10,7 @@ import java.util.Random;
 public class PlantainPeel {
     static int ARG_COUNT = 4;
     public static void main(String[] args) {
-    	System.out.println("Starting genetic algorithm...");
+        System.out.println("Starting genetic algorithm...");
         Random rng = new Random();
         int[] arguments;
         try {
@@ -27,21 +27,21 @@ public class PlantainPeel {
                 setArgs(arguments);
             }
             for (int i = 0; i < 100; i++) {
-                runGame(getArgs());
+                runGame(getArgs(), i);
                 //Parse game output and change args
             }
         }
         catch(Exception e) {
-        	System.out.println("Error 102");
+            System.out.println("Error 102");
             System.exit(102);
         }
     }
 
-    public static void runGame(int[] args) {
-    	try {
+    public static void runGame(int[] args, int n) {
+        try {
             String arguments = "";
             for (int i : args) {
-            	arguments += " " + i;
+                arguments += " " + i;
             }
 
             System.out.println("Arguments set.");
@@ -49,6 +49,8 @@ public class PlantainPeel {
             String bashFileContents = "set -e\n" +
             "javac MyBot.java\n" +
             "./halite --replay-directory replays/ -vvv --width 32 --height 32 \"java MyBot" + arguments + "\" \"java MyBot" + arguments + "\"";
+            
+            System.out.println("Running game " + n + " with args" + arguments);
             
             BufferedWriter bashFile = new BufferedWriter(new FileWriter("plantain.sh"));
             bashFile.write(bashFileContents);
@@ -58,12 +60,22 @@ public class PlantainPeel {
             
             Process p = Runtime.getRuntime().exec("sh plantain.sh");
             
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             
             String s;
+
             System.out.println("Waiting for current game to end...");
+
+            while ((s = stdError.readLine()) != null) System.out.println(s);
+
+            System.out.println("Game ended. Getting results...");
+
             while ((s = stdInput.readLine()) != null) System.out.println(s);
-            System.out.println("Game ended.");
+            for (int i = 0; i < ARG_COUNT; i++) {
+                //Read results
+            }
+            //Parse results
         }
         catch (IOException e) { System.exit(100); };
     }
@@ -83,7 +95,7 @@ public class PlantainPeel {
             return args;
         }
         catch (IOException e) {
-        	System.out.println("Error 103");
+            System.out.println("Error 103");
             System.exit(103);
         }
         System.out.println("Error 105");
@@ -103,7 +115,7 @@ public class PlantainPeel {
             argsFile.close();
         }
         catch(Exception e) {
-        	System.out.println("Error 104");
+            System.out.println("Error 104");
             System.exit(104);
         }
     }
